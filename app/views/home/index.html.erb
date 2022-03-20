@@ -1,0 +1,16 @@
+<%= render 'navbar' %>
+
+<% if notice %>
+  <p class="alert alert-success"><%= notice %></p>
+<% end %>
+<% if alert %>
+  <p class="alert alert-danger"><%= alert %></p>
+<% end %>
+
+<% if (user_signed_in?)%>
+  <%= render 'main' %>
+<% else %>
+  <%= render 'sub' %>
+<% end %>
+
+<%= render 'footer' %>

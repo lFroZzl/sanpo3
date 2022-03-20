@@ -1,0 +1,51 @@
+
+
+<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    Editar Perfil
+</button>
+
+<div class="collapse" id="collapseExample">
+
+  <div class="card card-body" id="profile-user">
+
+    <%= form_tag(update_profile_users_path, remote: true) do |form|  %>
+  
+        <div class="field" id="profile-name">
+            <%= label_tag :name%>
+            <%= text_field_tag :name, nil , placeholder: current_user.name %>
+        </div>
+
+        <div class="field" id="profile-age">
+            <%= label_tag :age %>
+            <%= text_field_tag :age, nil , placeholder: current_user.age %>
+        </div>
+
+        <div class="field" id="profile-note">
+            <%= label_tag :note %>
+            <%= text_field_tag :note, nil , placeholder: current_user.note %>
+        </div>
+            <div class="field" id="profile-address">
+            <%= label_tag :address %>
+            <%= text_field_tag :address, nil , placeholder: current_user.location&.address %>
+        </div>
+
+        </div>
+            <div class="field" id="profile-phone">
+            <%= label_tag :phone %>
+            <%= text_field_tag :phone_number, nil , placeholder: current_user.phone_number %>
+        </div>
+
+        <div class="actions" id="profile-submit">
+            <%= submit_tag %>
+        </div>
+
+    <% end %>
+    
+  </div>
+
+</div>
+
+
+
+
+

@@ -1,0 +1,45 @@
+<div id="user-profile">
+    <div id="avatar-data" class="card mb-3 " style="max-width: 540px;">
+    <div class="row no-gutters">
+        <div class="border border-primary col-md-4">
+            <img src="..." alt="Avatar">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title" id="current_name"><%= current_user.name %></h5>
+                <p class="card-text">Change avatar</p>
+                <p class="card-text"><small class="text-muted">url....</small></p>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div id="comment-data" class="card mb-3 w-50">
+        <div class="card-header">
+            Comment
+        </div>
+        <div class="card-body">
+            <p class="card-text" id="current_note"><%= current_user.note %></p>
+        </div>
+    </div>
+
+    <div id= "basic-data"class="card mb-3" style="width: 18rem;">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Email: <%= current_user.email%></li>
+            <li class="list-group-item" id="current_age">Age: <%= current_user.age %></li>
+            <li class="list-group-item" id="current_phone">Phone: <%= current_user.phone_number %></li>
+            <li class="list-group-item" id="current_address">Address: <%= current_user.location&.address %></li>
+        </ul>
+    </div>
+
+    <%= link_to 'Return', root_path, class: "btn btn-link border-primary" %>
+
+    <div id="edit-profile">
+        <%= render 'form' %>
+    </div>
+
+    <%= link_to "Change Email/Password", edit_user_registration_path, class: "nav-link" %>
+    
+</div>
+
+
