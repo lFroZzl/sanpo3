@@ -4,6 +4,8 @@ class Event < ApplicationRecord
     belongs_to :sport
     belongs_to :location, optional: true
 
+    enum status: [ :active, :canceled, :completed ]
+
     has_many :comments
     has_many :applicants
     

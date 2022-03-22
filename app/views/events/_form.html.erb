@@ -50,6 +50,29 @@
     <%= form.number_field :participant %>
   </div>
 
+  <div class="field">
+    <%= form.label :country %>
+    <%= form.text_field :country %>
+  </div>
+
+  <div class="field">
+    <%= form.label :region %>
+    <%= form.text_field :region %>
+  </div>
+
+  <div class="field">
+    <%= form.label :address %>
+    <%= form.text_field :address %>
+  </div>
+
+  <% if action_name == 'edit'%>
+    <div class="field">
+      <%= form.label :status %>
+      <%= form.select :status, Event.statuses.keys.to_a %>
+    </div>
+  <% end %>
+
+
   <div class="actions">
     <%= form.submit %>
   </div>

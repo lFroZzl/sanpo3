@@ -19,8 +19,18 @@ class EventsController < ApplicationController
   end
 
   def create
+    
    @event = Event.new(event_params)
    @event.event_host = current_user
+
+   location = Location.create({  
+    country: params["event"]["country"],
+    region: params["event"]["region"],
+    address: params["event"]["address"]
+   })
+
+   @event.location_id = location.id
+    
    respond_to do |format|
      if @event.save
        format.html { redirect_to @event, notice: 'Event was successfully created.' }
@@ -61,7 +71,8 @@ class EventsController < ApplicationController
     end
 
     def event_params
-      params.require(:event).permit(:title, :min_age, :max_age, :note, :start_date, :end_date, :participant, :sport_id)
+      params.require(:event).permit(:title, :min_age, :max_age, :note, :start_date, :end_date, :participant, :sport_id, :status)
     end
+
 
 end

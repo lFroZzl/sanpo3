@@ -24,7 +24,8 @@
             <%= label_tag :note %>
             <%= text_field_tag :note, nil , placeholder: current_user.note %>
         </div>
-            <div class="field" id="profile-address">
+        
+        <div class="field" id="profile-address">
             <%= label_tag :address %>
             <%= text_field_tag :address, nil , placeholder: current_user.location&.address %>
         </div>
