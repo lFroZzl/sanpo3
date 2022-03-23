@@ -1,79 +1,85 @@
-<%= form_with(model: event, local: true) do |form| %>
-  <% if event.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
-      <ul>
-        <% event.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+<form class="container">
+
+  <%= form_with(model: event, local: true) do |form| %>
+    <% if event.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
+        <ul>
+          <% event.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field form-group">
+      <%= form.label :title %>
+      <%= form.text_field :title, class: "form-control" %>
     </div>
+
+    <div class="field form-group">
+      <%= form.label :sport %>
+      <%= form.select :sport_id, Sport.all.pluck(:name, :id), class: "form-control"%>
+    </div>
+
+    <div class="field form-group">
+      <%= form.label :min_age %>
+      <%= form.number_field :min_age, class: "form-control" %>
+    </div>
+
+    <div class="field form-group">
+      <%= form.label :max_age %>
+      <%= form.number_field :max_age, class: "form-control" %>
+    </div>
+
+    <div class="field form-group">
+      <%= form.label :note %>
+      <%= form.text_area :note, class: "form-control" %>
+    </div>
+
+    <div class="field form-group">
+      <%= form.label :start_date %>
+      <%= form.datetime_select :start_date, class: "form-control"%>
+    </div>
+
+    <div class="field form-group">
+      <%= form.label :end_date %>
+      <%= form.datetime_select :end_date, class: "form-control" %>
+    </div>
+
+    <div class="field form-group">
+      <%= form.label :participant %>
+      <%= form.number_field :participant, class: "form-control" %>
+    </div>
+
+    <div class="field form-group">
+      <%= form.label :country %>
+      <%= form.text_field :country, class: "form-control" %>
+    </div>
+
+    <div class="field form-group">
+      <%= form.label :region %>
+      <%= form.text_field :region, class: "form-control" %>
+    </div>
+
+    <div class="field form-group">
+      <%= form.label :address %>
+      <%= form.text_field :address, class: "form-control" %>
+    </div>
+
+    <% if action_name == 'edit'%>
+      <div class="field form-group">
+        <%= form.label :status %>
+        <%= form.select :status, Event.statuses.keys.to_a, class: "form-control" %>
+      </div>
+    <% end %>
+
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+
+    <%= link_to 'Back', events_path %>
+
   <% end %>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
-
-  <div class="field">
-    <%= form.label :sport %>
-    <%= form.select :sport_id, Sport.all.pluck(:name, :id)%>
-  </div>
-
-  <div class="field">
-    <%= form.label :min_age %>
-    <%= form.number_field :min_age %>
-  </div>
-
-  <div class="field">
-    <%= form.label :max_age %>
-    <%= form.number_field :max_age %>
-  </div>
-
-  <div class="field">
-    <%= form.label :note %>
-    <%= form.text_area :note %>
-  </div>
-
-  <div class="field">
-    <%= form.label :start_date %>
-    <%= form.datetime_select :start_date %>
-  </div>
-
-  <div class="field">
-    <%= form.label :end_date %>
-    <%= form.datetime_select :end_date %>
-  </div>
-
-  <div class="field">
-    <%= form.label :participant %>
-    <%= form.number_field :participant %>
-  </div>
-
-  <div class="field">
-    <%= form.label :country %>
-    <%= form.text_field :country %>
-  </div>
-
-  <div class="field">
-    <%= form.label :region %>
-    <%= form.text_field :region %>
-  </div>
-
-  <div class="field">
-    <%= form.label :address %>
-    <%= form.text_field :address %>
-  </div>
-
-  <% if action_name == 'edit'%>
-    <div class="field">
-      <%= form.label :status %>
-      <%= form.select :status, Event.statuses.keys.to_a %>
-    </div>
-  <% end %>
-
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</form>

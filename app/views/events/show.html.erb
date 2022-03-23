@@ -1,39 +1,48 @@
 <p id="notice"><%= notice %></p>
+<div class="card text-center border-success mb-3 ml-3" style="max-width: 18rem;">
+  <div class="card-header bg-transparent border-success"><%= @event.title %></div>
+  <div class="card-body text-success">
+    <p class="card-text">
+      <strong>Host:</strong>
+      <%= @event.event_host.email %>
+    </p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @event.title %>
-</p>
+    <p class="card-text">
+      <strong>Min age:</strong>
+      <%= @event.min_age %>
+    </p>
 
-<p>
-  <strong>Min age:</strong>
-  <%= @event.min_age %>
-</p>
+    <p class="card-text">
+      <strong>Max age:</strong>
+      <%= @event.max_age %>
+    </p>
 
-<p>
-  <strong>Max age:</strong>
-  <%= @event.max_age %>
-</p>
+    <p class="card-text">
+      <strong>Start date:</strong>
+      <%= @event.start_date %>
+    </p>
 
-<p>
-  <strong>Note:</strong>
-  <%= @event.note %>
-</p>
+    <p class="card-text">
+      <strong>End date:</strong>
+      <%= @event.end_date %>
+    </p>
 
-<p>
-  <strong>Start date:</strong>
-  <%= @event.start_date %>
-</p>
+    <p class="card-text">
+      <strong>Participant:</strong>
+      <%= @event.participant %>
+    </p>
 
-<p>
-  <strong>End date:</strong>
-  <%= @event.end_date %>
-</p>
+    <p class="card-text">
+      <strong>Note:</strong>
+      <%= @event.note %>
+    </p>
 
-<p>
-  <strong>Participant:</strong>
-  <%= @event.participant %>
-</p>
+  </div>
 
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'My events', events_path %>
+  <div class="card-footer bg-transparent border-success">
+    <%= link_to 'Edit', edit_event_path(@event) %> |
+    <%= link_to 'My events', events_path %>
+  </div>
+
+</div>
+
