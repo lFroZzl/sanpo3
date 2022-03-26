@@ -9,6 +9,7 @@ class EventsController < ApplicationController
   end
 
   def show
+    @applicant = @event.applicants.find_by(my_id: current_user.id)
   end
 
   def new

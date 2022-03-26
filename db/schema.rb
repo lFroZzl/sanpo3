@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_22_003312) do
+ActiveRecord::Schema.define(version: 2022_03_26_032012) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -27,12 +27,12 @@ ActiveRecord::Schema.define(version: 2022_03_22_003312) do
   end
 
   create_table "applicants", force: :cascade do |t|
-    t.boolean "approved", default: false
     t.integer "rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "my_id"
     t.integer "event_id"
+    t.integer "status"
     t.index ["event_id"], name: "index_applicants_on_event_id"
     t.index ["my_id"], name: "index_applicants_on_my_id"
   end
