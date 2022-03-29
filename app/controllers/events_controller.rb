@@ -10,6 +10,7 @@ class EventsController < ApplicationController
 
   def show
     @applicant = @event.applicants.find_by(my_id: current_user.id)
+    @all_app = @event.applicants.all
   end
 
   def new
