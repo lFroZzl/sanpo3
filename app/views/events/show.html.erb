@@ -1,79 +1,110 @@
-  <p id="notice"><%= notice %></p>
-  <div class="card text-center border-success mb-3 ml-3" style="max-width: 18rem;">
-    <div class="card-header bg-transparent border-success"><%= @event.title %></div>
-    <div class="card-body text-success">
-      <p class="card-text">
-        <strong>Host:</strong>
-        <%= @event.event_host.email %>
-      </p>
+<div class="container">
+  <div class="row">
+    <div class="row">
+      <p id="notice"><%= notice %></p>
+      <div class="card text-center border-success mb-3 ml-3" style="max-width: 18rem;">
+        <div class="card-header bg-transparent border-success"><%= @event.title %></div>
+        <div class="card-body text-success">
+          <p class="card-text">
+            <strong>Host:</strong>
+            <%= @event.event_host.email %>
+          </p>
 
-      <p class="card-text">
-        <strong>Min age:</strong>
-        <%= @event.min_age %>
-      </p>
+          <p class="card-text">
+            <strong>Min age:</strong>
+            <%= @event.min_age %>
+          </p>
 
-      <p class="card-text">
-        <strong>Max age:</strong>
-        <%= @event.max_age %>
-      </p>
+          <p class="card-text">
+            <strong>Max age:</strong>
+            <%= @event.max_age %>
+          </p>
 
-      <p class="card-text">
-        <strong>Start date:</strong>
-        <%= @event.start_date %>
-      </p>
+          <p class="card-text">
+            <strong>Start date:</strong>
+            <%= @event.start_date %>
+          </p>
 
-      <p class="card-text">
-        <strong>End date:</strong>
-        <%= @event.end_date %>
-      </p>
+          <p class="card-text">
+            <strong>End date:</strong>
+            <%= @event.end_date %>
+          </p>
 
-      <p class="card-text">
-        <strong>Participant:</strong>
-        <%= @event.participant %>
-      </p>
-      <strong>Note:</strong>
-      <p class="card-text border border-top">
-        <%= @event.note %>
-      </p>
+          <p class="card-text">
+            <strong>Participant:</strong>
+            <%= @event.participant %>
+          </p>
+          <strong>Note:</strong>
+          <p class="card-text border border-top">
+            <%= @event.note %>
+          </p>
+        </div>
+
+        <% if current_user.id == @event.user_id %>
+          <div class="card-footer bg-transparent border-success">
+            <%= link_to 'Edit', edit_event_path(@event) %> |
+            <%= link_to 'My events', events_path %>
+          </div>
+
+        <%else%>
+
+          <div> 
+            <% if @applicant %>
+              <p>ya estas inscrito en este evento</p>
+              <%= link_to 'Cancel Application', @applicant, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %>
+            <%else%>
+              <%= link_to 'Join event', applicants_path( applicant: { my_id: current_user.id, event_id: @event.id }), method: :post, data: { confirm: 'Esta seguro que quiere entrar?'}, class: "btn btn-primary" %>
+            <% end %>
+          </div>
+        <% end%>
+      </div>
     </div>
 
-    <% if current_user.id == @event.user_id %>
-      <div class="card-footer bg-transparent border-success">
-        <%= link_to 'Edit', edit_event_path(@event) %> |
-        <%= link_to 'My events', events_path %>
-      </div>
-
-    <%else%>
-
-      <div> 
-        <% if @applicant %>
-          <p>ya estas inscrito en este evento</p>
-          <%= link_to 'Cancel Application', @applicant, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %>
-        <%else%>
-          <%= link_to 'Join event', applicants_path( applicant: { my_id: current_user.id, event_id: @event.id }), method: :post, data: { confirm: 'Esta seguro que quiere entrar?'}, class: "btn btn-primary" %>
-        <% end %>
-      </div>
-    <% end%>
-  </div>
-  
-<% if current_user.id == @event.user_id %>
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Status</th>
-        <th scope="col">Accept / Reject</th>
-      </tr>
-    </thead>
-    <tbody>
-     <% @all_app.each do |app| %>
-        <tr>
-          <th scope="row"><%= User.find(app.my_id).email %></th>
-          <td><%= app.status %></td>
-          <td><%= link_to 'A', app: { status: "Accepted" }, method: :post, data: { confirm: 'Aceptar applicante'}, class: "btn btn-warning" %>
-           / <%= link_to 'X', app: { status: "Rejected" }, method: :delete, data: { confirm: 'Rechazar applicante'}, class: "btn btn-warning" %></td>
-        </tr>
+    <div class="ml-5">  
+      <% if current_user.id == @event.user_id %>
+        <h2 class="text-center">Participants</h2>
+        <table class="table" style="max-width: 35rem;">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Remove</th>
+            </tr> 
+          </thead>
+          <tbody>
+          <% @all_app.each do |app| %>
+              <tr class="text-center">
+                <th scope="row"><%= User.find(app.my_id).email %></th>
+                <td><%= link_to 'X', app: { status: "Rejected" }, method: :delete, data: { confirm: 'Rechazar applicante'}, class: "btn btn-danger" %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
       <% end %>
-    </tbody>
-  </table>
-<% end%>
+    </div>
+
+    <div class="ml-5 mr-5">  
+      <% if current_user.id == @event.user_id %>
+        <h2 class="text-center">Applicants</h2>
+        <table class="table" style="max-width: 35rem;">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Status</th>
+              <th scope="col">Accept / Reject</th>
+            </tr> 
+          </thead>
+          <tbody>
+          <% @all_app.each do |app| %>
+              <tr class="text-center">
+                <th scope="row"><%= User.find(app.my_id).email %></th>
+                <td><%= app.status %></td>
+                <td><%= link_to 'A', app: { status: "Accepted" }, method: :delete, data: { confirm: 'Aceptar applicante'}, class: "btn btn-success" %>
+                / <%= link_to 'X', app: { status: "Rejected" }, method: :delete, data: { confirm: 'Rechazar applicante'}, class: "btn btn-danger" %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end%>
+    </div>
+  </div>
+</div>
