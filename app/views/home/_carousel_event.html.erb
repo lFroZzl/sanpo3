@@ -1,0 +1,13 @@
+<div class="container d-flex justify-content-between my-5">
+  <% @carousel_events.each do |event| %>
+    <a href="/events/<%= event.id %>" class="card carousel-card">
+      <img src="https://picsum.photos/200/150" class="card-img-top" alt="...">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><%= event.title %></li>
+        <li class="list-group-item"><%= event.sport.name %></li>
+        <li class="list-group-item">Entre: <%= event.min_age %> a: <%= event.max_age %> años</li>
+        <li class="list-group-item"><%= event.note %></li>
+      </ul>
+    </a>
+  <% end %>
+</div>

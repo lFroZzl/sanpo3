@@ -9,7 +9,7 @@ class User < ApplicationRecord
 
   has_many :events
   has_many :comments
-  has_many :applicants
+  has_many :applicants, foreign_key: :my_id
 
   enum role: [ :user, :admin ]
 

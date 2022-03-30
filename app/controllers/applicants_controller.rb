@@ -32,11 +32,10 @@ class ApplicantsController < ApplicationController
     def update
         respond_to do |format|
             if @applicant.update(applicant_params)
-            format.html { redirect_to @applicant, notice: 'applicant was successfully updated.' }
-            format.json { render :show, status: :ok, location: @applicant }
+            format.html { redirect_to @applicant.event, notice: 'applicant was successfully updated.' }
+
             else
-            format.html { render :edit }
-            format.json { render json: @applicant.errors, status: :unprocessable_entity }
+            format.html { redirect_to @applicant.event, notice: 'Applicant wasn\'t updated' }
             end
         end
     end

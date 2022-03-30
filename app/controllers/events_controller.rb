@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
 
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:show]
 
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
@@ -9,8 +9,16 @@ class EventsController < ApplicationController
   end
 
   def show
-    @applicant = @event.applicants.find_by(my_id: current_user.id)
-    @all_app = @event.applicants.all
+
+    if user_signed_in?
+      @applicant = @event.applicants.find_by(my_id: current_user.id)
+    end
+    
+    @all_app = @event.applicants
+    @accepted_apps = @all_app.where(status: "approved")
+    @pending_apps = @all_app.where(status: "pending")
+    @rejected_apps = @all_app.where(status: "rejected")
+
   end
 
   def new
@@ -63,8 +71,6 @@ class EventsController < ApplicationController
      format.json { head :no_content }
    end
  end
-
-
 
   private
 

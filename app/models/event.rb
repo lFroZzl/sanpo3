@@ -10,3 +10,6 @@ class Event < ApplicationRecord
     has_many :applicants
     
 end
+
+
+# validar en show que el host sea el que cambie el status del applicant
